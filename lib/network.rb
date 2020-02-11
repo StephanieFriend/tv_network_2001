@@ -33,4 +33,17 @@ class Network
     end
     show_actors
   end
+
+  def shows_by_actor
+    actors_shows = {}
+    array = []
+    @shows.map do |show|
+      if actors_shows.include?(show.characters.map { |character| character.actor }.first)
+        actors_shows[show.characters.map { |character| character.actor }.first] =  actors_shows[show.characters.map { |character| character.actor }.first] << show
+      else
+        actors_shows[show.characters.map { |character| character.actor }.first] = [show]
+      end
+    end
+    actors_shows
+  end
 end
